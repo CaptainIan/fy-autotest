@@ -1,0 +1,68 @@
+2026-03-25 20:00:22 INFO :******************* TestCase test_DMS_ORDER_LIST Start *******************
+2026-03-25 20:00:22 INFO :browser --> [{'browser': {'browser_name': 'chromium', 'headless': False, 'slow_mo': 50, 'downloads_path': None}, 'context': {'ignore_https_errors': True, 'java_script_enabled': True, 'bypass_csp': True, 'viewport': {'width': 1470, 'height': 715}, 'locale': 'zh-CN', 'extra_http_headers': None, 'timezone_id': 'Asia/Shanghai', 'record_video_dir': '/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets'}, 'env': 'test', 'hook': 'common/hook.py', 'tests': 'tests/DMS/DMS订单列表.py', 'users': None, 'app': {'package': 'com.wilmar.sfa', 'activity': 'crc646448c55d263b93b4.MainActivity', 'device': '127.0.0.1:5555'}}]
+ --> 0.26s
+
+2026-03-25 20:00:22 INFO :window --> []
+ --> 0.01s
+
+2026-03-25 20:00:22 INFO :page --> ['https://dms-plus-uat.wilmar.cn/#/login']
+ --> 2.78s
+
+2026-03-25 20:00:25 INFO :evaluate --> ["window.sessionStorage.setItem('WMP_token', 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjUyYTMwZmFjMmFjNzhjNTUiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE3NzQ0NDAwMjUsImV4cCI6MTc3NDUyNjQyNSwiaXNzIjoiaHR0cHM6Ly9kbXMtcGx1cy1pbnRlcm5hbC11YXQud2lsbWFyLmNuIiwiYXVkIjoiS2RzQTEiLCJjbGllbnRfaWQiOiJrZHMtYTEtY2xpZW50Iiwic3ViIjoiMTg0OTMyNzUzMTcyODEyNTk1MiIsImF1dGhfdGltZSI6MTc3NDQ0MDAyNSwiaWRwIjoibG9jYWwiLCJjb21wYW55aWQiOiIyIiwiY29tcGFueXNpZCI6IjIiLCJzc29uYW1lIjoi566h55CG5ZGYIiwiYWNjb3VudCI6IjEwMDAxIiwiaXNhZG1pbiI6IlRydWUiLCJiZWxvbmdfdHlwZSI6IjIiLCJlbXBsb3llZV9pZCI6IjAiLCJ0ZW5hbnRpZCI6IjA3YTY1MjExLTNkNzItNDMzOS05YWRjLTg0NTE1MWY4YWRhMCIsImN1c3RvbWVyX2lkIjoiMCIsImN1c3RvbWVyX2dyb3VwX2lkIjoiMCIsImlzc2FsZXMiOiJGYWxzZSIsImlzbG9naXN0aWNzIjoiRmFsc2UiLCJyb2xldHlwZSI6IjAiLCJ1c2FibGVfc3lzdGVtIjoiMyIsInNvdXJjZV9pZCI6Ii0xIiwiZ29tc19pZCI6IjE4NDkzMjc1MzE3MjgxMjU5NTIiLCJnb21zX3VzZXJuYW1lIjoiMTAwMDEiLCJpYXQiOjE3NzQ0NDAwMjUsInNjb3BlIjpbIktkc0ExIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.KG9UJvxBCw-EnucARr1FgRiKAWPdiS-JVeL7jDMXywIxkV6gggwqdOUqu-8ylnrC7hOiv0OG3M0ugz6nXTTC4vqnoK2sNHkYwYIEGk5aMABd8eI2F1awgc0g71fSApesnuLGJkRjG873K5cLF-ng8FeCfL1_USAoJB2RijyJ3CEsrt4AdMaeGKXXloFgbYIxm-OIUdlCBrm2nHrpJSOTrHtZWjd_aM84xb-UzzaLw0KMFghduEhdQyZCW95hbcV21UBFhAwf48zgeGGP2q9YCEgvMcfV6tQD2bR7NQEBWGihhTIIKxtia9-O434Mtow5nRhKkKiKDeN51SF3E92Ptw');"]
+ --> 0.0s
+
+2026-03-25 20:00:25 INFO :evaluate --> ["window.sessionStorage.setItem('WMP_userName', '10001');"]
+ --> 0.0s
+
+2026-03-25 20:00:25 INFO :evaluate --> ["window.sessionStorage.setItem('WMP_expires_in', '86400');"]
+ --> 0.0s
+
+2026-03-25 20:00:25 INFO :reload --> []
+ --> 1.24s
+
+2026-03-25 20:00:26 INFO :waitfor --> []
+ --> 0.04s
+
+2026-03-25 20:00:26 INFO :check --> ['首页']
+ --> 0.01s
+
+2026-03-25 20:00:26 INFO :click --> ['采购管理']
+ --> 1.01s
+
+2026-03-25 20:00:27 INFO :click --> ['采购订单']
+ --> 0.61s
+
+2026-03-25 20:00:28 INFO :sleep --> [1]
+ --> 1.0s
+
+2026-03-25 20:00:29 INFO :check --> ['PO26031709909']
+ --> 0.07s
+
+2026-03-25 20:00:29 INFO :sleep --> [1]
+ --> 1.0s
+
+2026-03-25 20:00:30 INFO :click --> ['class=el-button el-button--default']
+ --> 0.61s
+
+2026-03-25 20:00:31 INFO :click --> ['placeholder=请输入']
+ --> 0.59s
+
+2026-03-25 20:00:31 INFO :input --> ['PO26031709909']
+ --> 0.06s
+
+2026-03-25 20:00:31 INFO :click --> ['查询']
+ --> 0.6s
+
+2026-03-25 20:00:32 INFO :sleep --> [1]
+ --> 1.0s
+
+2026-03-25 20:00:33 INFO :check --> ['西安比亚迪标签']
+ --> 0.03s
+
+2026-03-25 20:00:33 INFO :sleep --> [1]
+ --> 1.01s
+
+2026-03-25 20:00:34 INFO :screenshot --> []
+ --> 1.04s
+
+2026-03-25 20:00:35 INFO :******************* Total: 1 Success: 1 Failed: 0 Error: 0 Skipped: 0 ********************
