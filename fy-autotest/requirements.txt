@@ -1,7 +1,0 @@
-pymysql
-requests
-DBUtils
-jsonpath
-airtest
-pocoui
-pyyaml
