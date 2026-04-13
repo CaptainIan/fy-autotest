@@ -1,0 +1,200 @@
+{
+    "summary": {
+        "total": 6,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "success": 6,
+        "duration": 7.69,
+        "passrate": 100.0,
+        "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+        "startTime": 1776067697000,
+        "endTime": 1776067705000,
+        "passrate_color": "color-success",
+        "type": "API"
+    },
+    "testCases": [
+        {
+            "path": "tests/api/\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5",
+            "cases": [
+                {
+                    "id": "b7215f27-928f-4af2-8c4a-af8853aeee63",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_p0",
+                    "case_desc": "TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u6b63\u5e38\u573a\u666f\uff08\u56fa\u5b9a\u65e5\u671f\u8303\u56f4\uff09",
+                    "case_source": "    def test_movestock_search_p0(self):\n        \"\"\"\n        TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u6b63\u5e38\u573a\u666f\uff08\u56fa\u5b9a\u65e5\u671f\u8303\u56f4\uff09\n        \"\"\"\n        # \u8bf7\u6c42\u4f53\uff08\u4ece curl \u7684 --data-raw \u83b7\u53d6\uff09\n        payload = {\n            \"BeginDoBillDate\": \"2026-01-13\",\n            \"EndDoBillDate\": \"2026-04-13\",\n            \"BillStatus\": [\"2\", \"3\", \"7\", \"14\", \"15\", \"16\", \"17\"],\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        # \u53d1\u9001\u8bf7\u6c42\uff08\u4ece curl \u7684 URL \u83b7\u53d6\u8def\u5f84\u548c\u53c2\u6570\uff09\n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 10, \"pagenum\": 1},\n            json=payload\n        )\n        \n        # \u94fe\u5f0f\u65ad\u8a00\uff1a\u72b6\u6001\u7801 200 + \u5b57\u6bb5\u5b58\u5728\n        response.assert_ok().assert_field(\"Items\", \"TotalCount\")\n        \n        # \u83b7\u53d6\u54cd\u5e94\u6570\u636e\n        data = response.json()\n        items = data.Items\n        total_count = data.TotalCount\n        \n        logger.log_info(f\"\u603b\u8bb0\u5f55\u6570: {total_count}\")\n        logger.log_info(f\"\u8fd4\u56de\u6570\u636e\u6761\u6570: {len(items)}\")\n        \n        # \u5982\u679c\u6709\u6570\u636e\uff0c\u9a8c\u8bc1\u7b2c\u4e00\u6761\u6570\u636e\u7ed3\u6784\n        if items:\n            first_item = items[0]\n            logger.log_info(f\"\u7b2c\u4e00\u6761\u6570\u636e: BillNo={first_item.get('BillNo')}, SrcWareHouseName={first_item.get('SrcWareHouseName')}\")\n            # \u9a8c\u8bc1\u5173\u952e\u5b57\u6bb5\u5b58\u5728\n            assert \"BillNo\" in first_item, \"\u7f3a\u5c11 BillNo \u5b57\u6bb5\"\n            assert \"SrcWareHouseName\" in first_item, \"\u7f3a\u5c11 SrcWareHouseName \u5b57\u6bb5\"\n            assert \"DestWareHouseName\" in first_item, \"\u7f3a\u5c11 DestWareHouseName \u5b57\u6bb5\"\n        \n        logger.log_info(\"\u2705 \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 P0 \u6d4b\u8bd5\u901a\u8fc7\")\n",
+                    "start_time": 1776067697.4989371,
+                    "end_time": 1776067698.973842,
+                    "duration": 1.47,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 10,\n  \"pagenum\": 1\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-01-13\",\n  \"EndDoBillDate\": \"2026-04-13\",\n  \"BillStatus\": [\n    \"2\",\n    \"3\",\n    \"7\",\n    \"14\",\n    \"15\",\n    \"16\",\n    \"17\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 200,
+                            "response": "{\n  \"TotalCount\": \"-1\",\n  \"Items\": [\n    {\n      \"Id\": \"2041759024546398208\",\n      \"BillNo\": \"MC34724260408021\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1565197273225285632\",\n      \"SrcWareHouseName\": \"\u8f66\u9500\u4e91D23451\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \"DestWareHouseId\": \"1567080600349773824\",\n      \"DestWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"DestWarehouseTypeCode\": \"\",\n      \"CustId\": \"0\",\n      \"CustName\": \"\",\n      \"CustAddressId\": null,\n      \"CustAddress\": \"\",\n      \"BillTypeSubId\": 38,\n      \"BillTypeSubName\": \"\u79fb\u5e93\",\n      \"MoveTypeSubId\": \"1\",\n      \"MoveTypeSubName\": \"\u5e38\u89c4\",\n      \"RefBillNo\": \"\",\n      \"ReverseBillId\": \"0\",\n      \"ReverseBillNo\": \"\",\n      \"BillStatus\": \"7\",\n      \"TransferBillID\": \"0\",\n      \"TransferBillNo\": \"\",\n      \"BillStatusName\": \"\u8fc7\u8d26\",\n      \"Remark\": \"\",\n      \"IsPrint\": false,\n      \"IsPrintName\": \"\u5426\",\n      \"PrintCount\": 0,\n      \"TotalWeight\": 0.4436,\n      \"TotalBaseUnitQty\": 35.0,\n      \"TotalMinUnitQty\": 190.0,\n      \"TotalAmount\": 0.0,\n      \"IsTotalRob\": 1,\n      \"LastPrintUserId\": \"0\",\n      \"LastPrintUserName\": null,\n      \"LastPrintTime\": null,\n      \"ReturnType\": \"\",\n      \"ReturnTypeName\": \"\",\n      \"CreateTime\": \"2026-04-08 14:04:20\",\n      \"CreateUserId\": \"1509420233528442880\",\n      \"CreateUserName\": \"\u5218\u65ed003\",\n      \"ModifyTime\": \"2026-04-08 14:04:37\",\n      \"ModifyUserId\": \"200092852\",\n      \"ModifyUserName\": \"admin\",\n      \"ICStockDetls\": [],\n      \"CheckUserId\": \"1509420233528442880\",\n      \"CheckUserName\": \"\u5218\u65ed003\",\n      \"CheckDate\": \"2026-04-08\",\n      \"PostingUserId\": \"200092852\",\n      \"PostingUserName\": \"admin\",\n      \"DeliveryStatus\": 0,\n      \"DeliveryType\": \"ZNA\",\n      \"DeliveryTypeName\": \"\u81ea\u63d0\",\n      \"SupplierId\": null,\n      \"TobMoveStockId\": null,\n      \"IsTob\": false,\n      \"ErpExt\": null,\n      \"EmpId\": null,\n      \"EmpName\": null,\n      \"TopicNumber\": \"\",\n      \"TopicNumberName\": \"\",\n      \"ScrapTypeId\": \"0\",\n      \"CostCenterId\": null,\n      \"CostCenterCode\": \"\",\n      \"ConsumeSubject\": \"\",\n      \"CostCenterDescribe\": \"\",\n      \"CostCenterRemark\": \"\",\n      \"SupplierName\": \"\",\n      \"OaApprovalCommonFlows\": [],\n      \"OaApprovalCommonFlow\": null,\n      \"ApprovalUser\": null,\n      \"ApprovalStatusName\": null,\n      \"ApprovalNode\": null,\n      \"Feedback\": null,\n      \"IsConsumer\": null,\n      \"IsOms\": null\n    },\n    {\n      \"Id\": \"2041757308224618496\",\n      \"BillNo\": \"MC34724260408020\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\""
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                },
+                {
+                    "id": "e763bb2f-558a-4438-ac62-ac604ea89d2b",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_different_page",
+                    "case_desc": "TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u5206\u9875\u67e5\u8be2",
+                    "case_source": "    def test_movestock_search_different_page(self):\n        \"\"\"\n        TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u5206\u9875\u67e5\u8be2\n        \"\"\"\n        payload = {\n            \"BeginDoBillDate\": \"2026-01-13\",\n            \"EndDoBillDate\": \"2026-04-13\",\n            \"BillStatus\": [\"2\", \"3\", \"7\", \"14\", \"15\", \"16\", \"17\"],\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        # \u67e5\u8be2\u7b2c\u4e8c\u9875\n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 10, \"pagenum\": 2},\n            json=payload\n        )\n        \n        response.assert_ok().assert_field(\"Items\", \"TotalCount\")\n        \n        data = response.json()\n        logger.log_info(f\"\u7b2c\u4e8c\u9875\u67e5\u8be2\uff0c\u603b\u8bb0\u5f55\u6570: {data.TotalCount}\")\n        logger.log_info(\"\u2705 \u5206\u9875\u67e5\u8be2\u6d4b\u8bd5\u901a\u8fc7\")\n",
+                    "start_time": 1776067698.9790468,
+                    "end_time": 1776067700.268026,
+                    "duration": 1.29,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 10,\n  \"pagenum\": 2\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-01-13\",\n  \"EndDoBillDate\": \"2026-04-13\",\n  \"BillStatus\": [\n    \"2\",\n    \"3\",\n    \"7\",\n    \"14\",\n    \"15\",\n    \"16\",\n    \"17\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 200,
+                            "response": "{\n  \"TotalCount\": \"-1\",\n  \"Items\": [\n    {\n      \"Id\": \"2041706339340206080\",\n      \"BillNo\": \"MC34724260408006\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \"DestWareHouseId\": \"1565197273225285632\",\n      \"DestWareHouseName\": \"\u8f66\u9500\u4e91D23451\",\n      \"DestWarehouseTypeCode\": \"\",\n      \"CustId\": \"0\",\n      \"CustName\": \"\",\n      \"CustAddressId\": null,\n      \"CustAddress\": \"\",\n      \"BillTypeSubId\": 38,\n      \"BillTypeSubName\": \"\u79fb\u5e93\",\n      \"MoveTypeSubId\": \"1\",\n      \"MoveTypeSubName\": \"\u5e38\u89c4\",\n      \"RefBillNo\": \"\",\n      \"ReverseBillId\": \"0\",\n      \"ReverseBillNo\": \"\",\n      \"BillStatus\": \"7\",\n      \"TransferBillID\": \"0\",\n      \"TransferBillNo\": \"\",\n      \"BillStatusName\": \"\u8fc7\u8d26\",\n      \"Remark\": \"\",\n      \"IsPrint\": false,\n      \"IsPrintName\": \"\u5426\",\n      \"PrintCount\": 0,\n      \"TotalWeight\": 0.9936,\n      \"TotalBaseUnitQty\": 100.0,\n      \"TotalMinUnitQty\": 600.0,\n      \"TotalAmount\": 0.0,\n      \"IsTotalRob\": 1,\n      \"LastPrintUserId\": \"0\",\n      \"LastPrintUserName\": null,\n      \"LastPrintTime\": null,\n      \"ReturnType\": \"\",\n      \"ReturnTypeName\": \"\",\n      \"CreateTime\": \"2026-04-08 10:34:59\",\n      \"CreateUserId\": \"1509420233528442880\",\n      \"CreateUserName\": \"\u5218\u65ed003\",\n      \"ModifyTime\": \"2026-04-08 10:38:36\",\n      \"ModifyUserId\": \"200092852\",\n      \"ModifyUserName\": \"admin\",\n      \"ICStockDetls\": [],\n      \"CheckUserId\": \"200092852\",\n      \"CheckUserName\": \"admin\",\n      \"CheckDate\": \"2026-04-08\",\n      \"PostingUserId\": \"200092852\",\n      \"PostingUserName\": \"admin\",\n      \"DeliveryStatus\": 0,\n      \"DeliveryType\": \"ZNA\",\n      \"DeliveryTypeName\": \"\u81ea\u63d0\",\n      \"SupplierId\": null,\n      \"TobMoveStockId\": null,\n      \"IsTob\": false,\n      \"ErpExt\": null,\n      \"EmpId\": null,\n      \"EmpName\": null,\n      \"TopicNumber\": \"\",\n      \"TopicNumberName\": \"\",\n      \"ScrapTypeId\": \"0\",\n      \"CostCenterId\": null,\n      \"CostCenterCode\": \"\",\n      \"ConsumeSubject\": \"\",\n      \"CostCenterDescribe\": \"\",\n      \"CostCenterRemark\": \"\",\n      \"SupplierName\": \"\",\n      \"OaApprovalCommonFlows\": [],\n      \"OaApprovalCommonFlow\": null,\n      \"ApprovalUser\": null,\n      \"ApprovalStatusName\": null,\n      \"ApprovalNode\": null,\n      \"Feedback\": null,\n      \"IsConsumer\": null,\n      \"IsOms\": null\n    },\n    {\n      \"Id\": \"2041702061066240000\",\n      \"BillNo\": \"MC34724260408004\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \""
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                },
+                {
+                    "id": "8f67877d-6ad1-4588-ac76-8d7603457004",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_by_status",
+                    "case_desc": "TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u6309\u5355\u636e\u72b6\u6001\u7b5b\u9009",
+                    "case_source": "    def test_movestock_search_by_status(self):\n        \"\"\"\n        TC-P0: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u6309\u5355\u636e\u72b6\u6001\u7b5b\u9009\n        \"\"\"\n        # \u53ea\u67e5\u8be2\u72b6\u6001\u4e3a \"2\"\uff08\u5df2\u5ba1\u6838\uff09\u7684\u5355\u636e\n        payload = {\n            \"BeginDoBillDate\": \"2026-01-13\",\n            \"EndDoBillDate\": \"2026-04-13\",\n            \"BillStatus\": [\"2\"],  # \u53ea\u67e5\u5df2\u5ba1\u6838\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 10, \"pagenum\": 1},\n            json=payload\n        )\n        \n        response.assert_ok().assert_field(\"Items\", \"TotalCount\")\n        \n        data = response.json()\n        items = data.Items\n        \n        # \u9a8c\u8bc1\u8fd4\u56de\u7684\u6570\u636e\u72b6\u6001\u90fd\u662f\u5df2\u5ba1\u6838\n        if items:\n            for item in items:\n                assert item.get('BillStatus') == '2', f\"\u5355\u636e\u72b6\u6001\u5e94\u4e3a\u5df2\u5ba1\u6838(2)\uff0c\u5b9e\u9645\u4e3a: {item.get('BillStatus')}\"\n        \n        logger.log_info(f\"\u6309\u72b6\u6001\u7b5b\u9009\u67e5\u8be2\uff0c\u8fd4\u56de\u6570\u636e\u6761\u6570: {len(items)}\")\n        logger.log_info(\"\u2705 \u6309\u5355\u636e\u72b6\u6001\u7b5b\u9009\u6d4b\u8bd5\u901a\u8fc7\")\n",
+                    "start_time": 1776067700.269173,
+                    "end_time": 1776067701.1471932,
+                    "duration": 0.88,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 10,\n  \"pagenum\": 1\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-01-13\",\n  \"EndDoBillDate\": \"2026-04-13\",\n  \"BillStatus\": [\n    \"2\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 200,
+                            "response": "{\n  \"TotalCount\": \"-1\",\n  \"Items\": [\n    {\n      \"Id\": \"2041687850151919616\",\n      \"BillNo\": \"MC34724260408001\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": null,\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \"DestWareHouseId\": \"1567079879105646592\",\n      \"DestWareHouseName\": \"\u8f66\u9500A000000\",\n      \"DestWarehouseTypeCode\": \"\",\n      \"CustId\": \"0\",\n      \"CustName\": \"\",\n      \"CustAddressId\": null,\n      \"CustAddress\": \"\",\n      \"BillTypeSubId\": 38,\n      \"BillTypeSubName\": \"\u79fb\u5e93\",\n      \"MoveTypeSubId\": \"1\",\n      \"MoveTypeSubName\": \"\u5e38\u89c4\",\n      \"RefBillNo\": \"\",\n      \"ReverseBillId\": \"0\",\n      \"ReverseBillNo\": \"\",\n      \"BillStatus\": \"2\",\n      \"TransferBillID\": \"0\",\n      \"TransferBillNo\": \"\",\n      \"BillStatusName\": \"\u65b0\u5efa\",\n      \"Remark\": \"\",\n      \"IsPrint\": false,\n      \"IsPrintName\": \"\u5426\",\n      \"PrintCount\": 0,\n      \"TotalWeight\": 0.082204,\n      \"TotalBaseUnitQty\": 9.08333333,\n      \"TotalMinUnitQty\": 80.0,\n      \"TotalAmount\": 0.0,\n      \"IsTotalRob\": 1,\n      \"LastPrintUserId\": \"0\",\n      \"LastPrintUserName\": null,\n      \"LastPrintTime\": null,\n      \"ReturnType\": \"\",\n      \"ReturnTypeName\": \"\",\n      \"CreateTime\": \"2026-04-08 09:21:31\",\n      \"CreateUserId\": \"1509420233528442880\",\n      \"CreateUserName\": \"\u5218\u65ed003\",\n      \"ModifyTime\": \"2026-04-08 09:21:31\",\n      \"ModifyUserId\": \"1509420233528442880\",\n      \"ModifyUserName\": \"\u5218\u65ed003\",\n      \"ICStockDetls\": [],\n      \"CheckUserId\": \"0\",\n      \"CheckUserName\": null,\n      \"CheckDate\": null,\n      \"PostingUserId\": \"0\",\n      \"PostingUserName\": null,\n      \"DeliveryStatus\": 0,\n      \"DeliveryType\": \"ZNA\",\n      \"DeliveryTypeName\": \"\u81ea\u63d0\",\n      \"SupplierId\": null,\n      \"TobMoveStockId\": null,\n      \"IsTob\": false,\n      \"ErpExt\": null,\n      \"EmpId\": null,\n      \"EmpName\": null,\n      \"TopicNumber\": \"\",\n      \"TopicNumberName\": \"\",\n      \"ScrapTypeId\": \"0\",\n      \"CostCenterId\": null,\n      \"CostCenterCode\": \"\",\n      \"ConsumeSubject\": \"\",\n      \"CostCenterDescribe\": \"\",\n      \"CostCenterRemark\": \"\",\n      \"SupplierName\": \"\",\n      \"OaApprovalCommonFlows\": [],\n      \"OaApprovalCommonFlow\": null,\n      \"ApprovalUser\": null,\n      \"ApprovalStatusName\": null,\n      \"ApprovalNode\": null,\n      \"Feedback\": null,\n      \"IsConsumer\": null,\n      \"IsOms\": null\n    },\n    {\n      \"Id\": \"2039970295599292416\",\n      \"BillNo\": \"MC34724260403015\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-03\",\n      \"ICBillDate\": null,\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \"DestWareHouseId\": \"15670798791"
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                },
+                {
+                    "id": "de60d7e6-69fa-4157-9278-e7c1fce1656b",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_invalid_token",
+                    "case_desc": "TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u65e0\u6548 Token \u573a\u666f",
+                    "case_source": "    def test_movestock_search_invalid_token(self):\n        \"\"\"\n        TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u65e0\u6548 Token \u573a\u666f\n        \"\"\"\n        # \u4e34\u65f6\u6e05\u9664 Token\n        requests.clear_token()\n        \n        payload = {\n            \"BeginDoBillDate\": \"2026-01-13\",\n            \"EndDoBillDate\": \"2026-04-13\",\n            \"BillStatus\": [\"2\", \"3\", \"7\", \"14\", \"15\", \"16\", \"17\"],\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 10, \"pagenum\": 1},\n            json=payload\n        )\n        \n        # \u9a8c\u8bc1\u8fd4\u56de 401 \u672a\u6388\u6743\n        response.assert_status_in(401, 403)\n        logger.log_info(f\"\u2705 \u65e0\u6548 Token \u573a\u666f\u6d4b\u8bd5\u901a\u8fc7\uff0c\u8fd4\u56de\u72b6\u6001\u7801: {response.status_code}\")\n        \n        # \u6062\u590d Token\n        self.setUpClass()\n",
+                    "start_time": 1776067701.1488461,
+                    "end_time": 1776067701.233848,
+                    "duration": 0.09,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 10,\n  \"pagenum\": 1\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-01-13\",\n  \"EndDoBillDate\": \"2026-04-13\",\n  \"BillStatus\": [\n    \"2\",\n    \"3\",\n    \"7\",\n    \"14\",\n    \"15\",\n    \"16\",\n    \"17\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 401,
+                            "response": ""
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                },
+                {
+                    "id": "0326f3ba-fbe6-41de-8b40-d6e070b2bd72",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_empty_date",
+                    "case_desc": "TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u7a7a\u65e5\u671f\u8303\u56f4\uff08\u8fb9\u754c\u573a\u666f\uff09",
+                    "case_source": "    def test_movestock_search_empty_date(self):\n        \"\"\"\n        TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u7a7a\u65e5\u671f\u8303\u56f4\uff08\u8fb9\u754c\u573a\u666f\uff09\n        \"\"\"\n        payload = {\n            \"BeginDoBillDate\": \"2026-04-13\",\n            \"EndDoBillDate\": \"2026-01-13\",  # \u7ed3\u675f\u65e5\u671f\u65e9\u4e8e\u5f00\u59cb\u65e5\u671f\n            \"BillStatus\": [\"2\", \"3\", \"7\", \"14\", \"15\", \"16\", \"17\"],\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 10, \"pagenum\": 1},\n            json=payload\n        )\n        \n        # \u9a8c\u8bc1\u63a5\u53e3\u6b63\u5e38\u8fd4\u56de\uff08\u53ef\u80fd\u8fd4\u56de\u7a7a\u6570\u636e\u6216\u9519\u8bef\u63d0\u793a\uff09\n        response.assert_ok()\n        data = response.json()\n        \n        logger.log_info(f\"\u5f02\u5e38\u65e5\u671f\u67e5\u8be2\uff0c\u8fd4\u56de\u6570\u636e\u6761\u6570: {len(data.Items)}\")\n        logger.log_info(\"\u2705 \u7a7a\u65e5\u671f\u8303\u56f4\u8fb9\u754c\u6d4b\u8bd5\u901a\u8fc7\")\n",
+                    "start_time": 1776067701.2350001,
+                    "end_time": 1776067701.368294,
+                    "duration": 0.13,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 10,\n  \"pagenum\": 1\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-04-13\",\n  \"EndDoBillDate\": \"2026-01-13\",\n  \"BillStatus\": [\n    \"2\",\n    \"3\",\n    \"7\",\n    \"14\",\n    \"15\",\n    \"16\",\n    \"17\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 200,
+                            "response": "{\n  \"TotalCount\": \"-1\",\n  \"Items\": []\n}"
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                },
+                {
+                    "id": "6260f565-7d6e-4891-a3f3-7c4cea0aa169",
+                    "reports": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports",
+                    "file_name": "\u5e93\u5b58\u79fb\u5e93\u67e5\u8be2\u63a5\u53e3\u6d4b\u8bd5.py",
+                    "case_module": "tests/api",
+                    "case_name": "test_movestock_search_large_pagesize",
+                    "case_desc": "TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u5927\u5206\u9875\u8fb9\u754c\u573a\u666f",
+                    "case_source": "    def test_movestock_search_large_pagesize(self):\n        \"\"\"\n        TC-P1: \u5e93\u5b58\u79fb\u5e93\u67e5\u8be2 - \u5927\u5206\u9875\u8fb9\u754c\u573a\u666f\n        \"\"\"\n        payload = {\n            \"BeginDoBillDate\": \"2026-01-13\",\n            \"EndDoBillDate\": \"2026-04-13\",\n            \"BillStatus\": [\"2\", \"3\", \"7\", \"14\", \"15\", \"16\", \"17\"],\n            \"SrcWareHouseIds\": [],\n            \"DestWareHouseIds\": [],\n            \"CreateUserIds\": [],\n            \"ProdIds\": []\n        }\n        \n        # \u67e5\u8be2\u5927\u5206\u9875\uff08100\u6761\uff09\n        response = requests.post(\n            \"/api/inventory/movestock/_search\",\n            params={\"pagesize\": 100, \"pagenum\": 1},\n            json=payload\n        )\n        \n        response.assert_ok().assert_field(\"Items\", \"TotalCount\")\n        \n        data = response.json()\n        logger.log_info(f\"\u5927\u5206\u9875\u67e5\u8be2\uff0c\u8fd4\u56de\u6570\u636e\u6761\u6570: {len(data.Items)}\")\n        logger.log_info(\"\u2705 \u5927\u5206\u9875\u8fb9\u754c\u6d4b\u8bd5\u901a\u8fc7\")\n",
+                    "start_time": 1776067701.369141,
+                    "end_time": 1776067705.053796,
+                    "duration": 3.68,
+                    "status": 0,
+                    "message": null,
+                    "screenshot_path": null,
+                    "video_path": null,
+                    "request": [
+                        {
+                            "method": "POST",
+                            "url": "https://kdsa1-api-uat.wilmar.cn/api/inventory/movestock/_search",
+                            "params": "{\n  \"pagesize\": 100,\n  \"pagenum\": 1\n}",
+                            "body": "{\n  \"BeginDoBillDate\": \"2026-01-13\",\n  \"EndDoBillDate\": \"2026-04-13\",\n  \"BillStatus\": [\n    \"2\",\n    \"3\",\n    \"7\",\n    \"14\",\n    \"15\",\n    \"16\",\n    \"17\"\n  ],\n  \"SrcWareHouseIds\": [],\n  \"DestWareHouseIds\": [],\n  \"CreateUserIds\": [],\n  \"ProdIds\": []\n}",
+                            "status_code": 200,
+                            "response": "{\n  \"TotalCount\": \"-1\",\n  \"Items\": [\n    {\n      \"Id\": \"2041759024546398208\",\n      \"BillNo\": \"MC34724260408021\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1565197273225285632\",\n      \"SrcWareHouseName\": \"\u8f66\u9500\u4e91D23451\",\n      \"SrcWarehouseTypeCode\": \"\",\n      \"DestWareHouseId\": \"1567080600349773824\",\n      \"DestWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"DestWarehouseTypeCode\": \"\",\n      \"CustId\": \"0\",\n      \"CustName\": \"\",\n      \"CustAddressId\": null,\n      \"CustAddress\": \"\",\n      \"BillTypeSubId\": 38,\n      \"BillTypeSubName\": \"\u79fb\u5e93\",\n      \"MoveTypeSubId\": \"1\",\n      \"MoveTypeSubName\": \"\u5e38\u89c4\",\n      \"RefBillNo\": \"\",\n      \"ReverseBillId\": \"0\",\n      \"ReverseBillNo\": \"\",\n      \"BillStatus\": \"7\",\n      \"TransferBillID\": \"0\",\n      \"TransferBillNo\": \"\",\n      \"BillStatusName\": \"\u8fc7\u8d26\",\n      \"Remark\": \"\",\n      \"IsPrint\": false,\n      \"IsPrintName\": \"\u5426\",\n      \"PrintCount\": 0,\n      \"TotalWeight\": 0.4436,\n      \"TotalBaseUnitQty\": 35.0,\n      \"TotalMinUnitQty\": 190.0,\n      \"TotalAmount\": 0.0,\n      \"IsTotalRob\": 1,\n      \"LastPrintUserId\": \"0\",\n      \"LastPrintUserName\": null,\n      \"LastPrintTime\": null,\n      \"ReturnType\": \"\",\n      \"ReturnTypeName\": \"\",\n      \"CreateTime\": \"2026-04-08 14:04:20\",\n      \"CreateUserId\": \"1509420233528442880\",\n      \"CreateUserName\": \"\u5218\u65ed003\",\n      \"ModifyTime\": \"2026-04-08 14:04:37\",\n      \"ModifyUserId\": \"200092852\",\n      \"ModifyUserName\": \"admin\",\n      \"ICStockDetls\": [],\n      \"CheckUserId\": \"1509420233528442880\",\n      \"CheckUserName\": \"\u5218\u65ed003\",\n      \"CheckDate\": \"2026-04-08\",\n      \"PostingUserId\": \"200092852\",\n      \"PostingUserName\": \"admin\",\n      \"DeliveryStatus\": 0,\n      \"DeliveryType\": \"ZNA\",\n      \"DeliveryTypeName\": \"\u81ea\u63d0\",\n      \"SupplierId\": null,\n      \"TobMoveStockId\": null,\n      \"IsTob\": false,\n      \"ErpExt\": null,\n      \"EmpId\": null,\n      \"EmpName\": null,\n      \"TopicNumber\": \"\",\n      \"TopicNumberName\": \"\",\n      \"ScrapTypeId\": \"0\",\n      \"CostCenterId\": null,\n      \"CostCenterCode\": \"\",\n      \"ConsumeSubject\": \"\",\n      \"CostCenterDescribe\": \"\",\n      \"CostCenterRemark\": \"\",\n      \"SupplierName\": \"\",\n      \"OaApprovalCommonFlows\": [],\n      \"OaApprovalCommonFlow\": null,\n      \"ApprovalUser\": null,\n      \"ApprovalStatusName\": null,\n      \"ApprovalNode\": null,\n      \"Feedback\": null,\n      \"IsConsumer\": null,\n      \"IsOms\": null\n    },\n    {\n      \"Id\": \"2041757308224618496\",\n      \"BillNo\": \"MC34724260408020\",\n      \"CompanyId\": \"34724\",\n      \"CompanyCode\": \"\",\n      \"DistributorId\": \"35716\",\n      \"DistributorName\": \"***\u88d5\u4e30\u5546\u8d38\u6709***\",\n      \"DistributorContractId\": \"34739\",\n      \"DoBillDate\": \"2026-04-08\",\n      \"ICBillDate\": \"2026-04-08\",\n      \"BillTypeId\": \"10\",\n      \"SrcWareHouseId\": \"1567080600349773824\",\n      \"SrcWareHouseName\": \"\u6b63\u5e38\u4ed3\",\n      \"SrcWarehouseTypeCode\": \"\""
+                        }
+                    ],
+                    "reports_assets": "/Users/xuyi/Documents/AI_test/AItest/fy-autotest/reports/src/assets",
+                    "is_api": true
+                }
+            ],
+            "total": 6,
+            "success": 6,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "duration": 7.54,
+            "passrate": 100.0
+        }
+    ],
+    "failureTestCases": [],
+    "users": null
+}
